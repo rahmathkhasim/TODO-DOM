@@ -1,0 +1,14 @@
+body{
+    font-family: Oswald;
+    text-align: center;
+}
+.chintu1{
+    display: inline-block;
+    margin-top: 25px;
+}
+.chintu2{
+    display: inline-block;
+}
+#existing{
+    display: inline-block;
+}

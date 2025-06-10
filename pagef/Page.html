@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Page.css">
+</head>
+<body>
+     <button onclick="location.href='../home/Home.html'">
+        Home
+    </button>   
+    <div class="div2">
+       <img height="100px" width="100px" src="../animation/hello.gif" alt="Animated GIF">
+       <h1 > 📋TODO list for you man</h1>
+       <textarea name="textinput" id="textarea"></textarea>
+       <br>
+        <button class="btn" onclick="addToDo()">
+            ADD NEW TODO
+        </button>
+        <div id="list">
+            <ul style="list-style-type: none;">
+                 
+            </ul>
+        </div>
+     
+    </div>
+    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        let pageId = urlParams.get("page");
+        if(!pageId){
+            window.location.href="?page=1";
+        }
+        const x = document.getElementById("list");
+        const storageKey= `todo_page_${pageId}`
+    
+        function loadTodos(){
+            const todos = JSON.parse(localStorage.getItem(storageKey)) || [];
+            document.querySelector("ul").innerHTML="";
+            for(let i=0;i<todos.length;i++){
+                const li = document.createElement("li");
+                const label = document.createElement("label");
+                const input = document.createElement("input");
+                input.type="checkbox";
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(" "+todos[i]));
+                li.appendChild(label);
+                document.querySelector("ul").appendChild(li);
+            }
+        }
+
+        function addToDo(){
+            const input=document.getElementById('textarea').value;
+            if (input.trim()=="") return;
+            const todo = JSON.parse(localStorage.getItem(storageKey)) || [];
+            todo.push(input);
+            localStorage.setItem(storageKey,JSON.stringify(todo));
+            document.querySelector("textarea").value=" ";
+            loadTodos();
+        }
+        
+      loadTodos();
+
+
+    </script>
+</body>
+</html>
