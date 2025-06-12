@@ -14,7 +14,7 @@ function showPages(){
         if(localStorage.getItem(i)!=null){
         li.textContent=`page ${localStorage.getItem(i,i)}`;
         li.onclick=function(){
-          window.location.href = `/pagef/Page.html?page=${i}`;
+          window.location.href = `\pagef/Page.html?page=${i}`;
         }
         li.appendChild(br);
         x.appendChild(li);
