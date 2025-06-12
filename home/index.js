@@ -11,12 +11,14 @@ function showPages(){
     for(let i=1;i<=localStorage.length;i++){
         const li =document.createElement('button');
         const br =document.createElement('br');
+        if(localStorage.getItem(i)!=null){
         li.textContent=`page ${localStorage.getItem(i,i)}`;
         li.onclick=function(){
           window.location.href = `/pagef/Page.html?page=${i}`;
         }
         li.appendChild(br);
         x.appendChild(li);
+      }
 }
 }
 showPages();
