@@ -45,8 +45,18 @@
                 const label = document.createElement("label");
                 const input = document.createElement("input");
                 input.type="checkbox";
+                input.checked=todos[i].done;
+                const span = document.createElement("span");
+                span.textContent = " " + todos[i].text;
+                span.className = todos[i].done ? "completed" : "";
+                input.addEventListener("change", () => {
+                    todos[i].done = input.checked;
+                    localStorage.setItem(storageKey, JSON.stringify(todos));
+                    span.className = input.checked ? "completed" : "";
+                });
+
                 label.appendChild(input);
-                label.appendChild(document.createTextNode(" "+todos[i]));
+                label.appendChild(span);
                 li.appendChild(label);
                 document.querySelector("ul").appendChild(li);
             }
@@ -56,7 +66,7 @@
             const input=document.getElementById('textarea').value;
             if (input.trim()=="") return;
             const todo = JSON.parse(localStorage.getItem(storageKey)) || [];
-            todo.push(input);
+            todo.push({text:input, done:false});
             localStorage.setItem(storageKey,JSON.stringify(todo));
             document.querySelector("textarea").value=" ";
             loadTodos();
